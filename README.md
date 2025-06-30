@@ -29,14 +29,15 @@ OpenHands を使用して Issue から自動的に Pull Request を作成する�
 ## 使い方
 
 1. Issue を作成する
-2. OpenHands エージェントが自動的に Issue を分析し、解決策を実装した Pull Request を作成します
-3. コメントで `@openhands-agent` を使用して追加の指示を出すことも可能です
+2. システムが自動的に `fix-me` ラベルを追加します
+3. OpenHands エージェントが自動的に Issue を分析し、解決策を実装した Pull Request を作成します
+4. コメントで `@openhands-agent` を使用して追加の指示を出すことも可能です
 
 ## トリガー
 
 ワークフローは以下のイベントでトリガーされます：
-- Issue が開かれた時 (`opened`)
-- Issue にラベルが付けられた時 (`labeled`)
+- Issue が開かれた時 (`opened`) - 自動的に `fix-me` ラベルが追加されます
+- Issue にラベルが付けられた時 (`labeled`) - `fix-me` ラベルが必要です
 - Pull Request にラベルが付けられた時
 - Issue や Pull Request にコメントが作成された時
 - Pull Request レビューが提出された時
