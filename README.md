@@ -4,7 +4,7 @@ OpenHands を使用して Issue から自動的に Pull Request を作成する�
 
 ## 機能
 
-このリポジトリには、Issue が作成されたりラベルが付けられたりした際に、OpenHands AI エージェントが自動的に Pull Request を作成する GitHub Actions ワークフローが含まれています。
+このリポジトリには、Issue に `fix-me` ラベルが付与された時や、指定のマクロを含むコメントが作成された時などに、OpenHands AI エージェントが自動的に Pull Request を作成する GitHub Actions ワークフローが含まれています。
 
 ## セットアップ
 
@@ -28,16 +28,15 @@ OpenHands を使用して Issue から自動的に Pull Request を作成する�
 
 ## 使い方
 
-1. Issue を作成する
-2. システムが自動的に `fix-me` ラベルを追加します
-3. OpenHands エージェントが自動的に Issue を分析し、解決策を実装した Pull Request を作成します
-4. コメントで `@openhands-agent` を使用して追加の指示を出すことも可能です
+1. Issue を作成し、`fix-me` ラベルを付与する
+2. `fix-me` ラベルが付与された Issue に対して、OpenHands エージェントが自動的に Issue を分析し、解決策を実装した Pull Request を作成します
+3. Issue、Pull Request、Pull Request レビューコメントに「@openhands-agent」(または `OPENHANDS_MACRO` で指定したマクロ) を含むコメントを追加することで、追加の指示を出すことも可能です
 
 ## トリガー
 
 ワークフローは以下のイベントでトリガーされます：
-- Issue が開かれた時 (`opened`) - 自動的に `fix-me` ラベルが追加されます
-- Issue にラベルが付けられた時 (`labeled`) - `fix-me` ラベルが必要です
-- Pull Request にラベルが付けられた時
-- Issue や Pull Request にコメントが作成された時
-- Pull Request レビューが提出された時
+- Issue に `fix-me` ラベルが付与された時
+- Pull Request がアサインされた時
+- Issue、Pull Request、Pull Request レビューコメントに「@openhands-agent」(または `OPENHANDS_MACRO` で指定したマクロ) を含むコメントが作成された時
+
+※ コメントによるトリガーは、コメント本文にマクロが含まれている場合のみ発火します。
