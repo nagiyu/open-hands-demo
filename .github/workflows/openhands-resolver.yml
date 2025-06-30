@@ -24,6 +24,42 @@ jobs:
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, vars.OPENHANDS_MACRO || '@openhands-agent')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, vars.OPENHANDS_MACRO || '@openhands-agent'))
     uses: All-Hands-AI/OpenHands/.github/workflows/openhands-resolver.yml@main
+    steps:
+      - name: AWS CLI install
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install --update
+          aws --version
+
+      - name: AWS set Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Get GitHub secrets from AWS SecretsManager
+        id: github_secrets
+        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        with:
+          secret-ids: |
+            GitHub
+          parse-json-secrets: true
+
+      - name: Get OpenAI secrets from AWS SecretsManager
+        id: openai_secrets
+        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        with:
+          secret-ids: |
+            OpenAI
+          parse-json-secrets: true
+
+      - name: Export secrets as env
+        run: |
+          echo "PAT_TOKEN=${{ env.GitHub_PERSONAL_ACCESS_TOKEN }}" >> $GITHUB_ENV
+          echo "PAT_USERNAME=${{ env.GitHub_USERNAME }}" >> $GITHUB_ENV
+          echo "LLM_API_KEY=${{ env.OpenAI_OPEN_HANDS_API_KEY }}" >> $GITHUB_ENV
     with:
       macro: ${{ vars.OPENHANDS_MACRO || '@openhands-agent' }}
       max_iterations: ${{ fromJson(vars.OPENHANDS_MAX_ITER || '50') }}
