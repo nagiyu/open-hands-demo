@@ -3,15 +3,13 @@ name: Resolve Issue with OpenHands
 
 "on":
   issues:
-    types: [opened, labeled]
-  pull_request:
     types: [labeled]
+  pull_request:
+    types: [assigned]
   issue_comment:
     types: [created]
   pull_request_review_comment:
     types: [created]
-  pull_request_review:
-    types: [submitted]
 
 permissions:
   contents: write
@@ -20,6 +18,10 @@ permissions:
 
 jobs:
   call-openhands-resolver:
+    if: |
+      (github.event_name == 'issues' && github.event.action == 'labeled' && github.event.label.name == 'fix-me') ||
+      (github.event_name == 'pull_request' && github.event.action == 'assigned') ||
+      ((github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment') && contains(github.event.comment.body, vars.OPENHANDS_MACRO || '@openhands-agent'))
     uses: All-Hands-AI/OpenHands/.github/workflows/openhands-resolver.yml@main
     with:
       macro: ${{ vars.OPENHANDS_MACRO || '@openhands-agent' }}
