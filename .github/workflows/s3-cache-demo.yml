@@ -1,6 +1,7 @@
 name: deploy-client
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
