@@ -38,8 +38,8 @@ jobs:
     - name: Upload file to S3
       run: aws s3 cp ./cache.txt s3://github-open-hands/ --quiet
 
-    - name: Wait for 60 seconds
-      run: sleep 60
+    - name: Wait for 180 seconds
+      run: sleep 180
     
     - name: Delete cache.txt from S3
       if: ${{ always() }}
