@@ -57,6 +57,14 @@ body:
       placeholder: 例）関連ドキュメントやURL
     validations:
       required: false
+  - type: textarea
+    id: prohibitions
+    attributes:
+      label: 禁止事項 (Prohibitions)
+      description: 作業においてやってはいけないこと・禁止事項があれば記載してください。
+      placeholder: 例）- 本番データの削除は禁止
+    validations:
+      required: false
   - type: markdown
     attributes:
       value: |
@@ -65,3 +73,4 @@ body:
         - 作業内容・目的・完了条件が明確になるように記載してください。
         - 曖昧な表現は避け、具体的なアクションや期待結果を明記してください。
         - 必要に応じて追加の情報や前提条件も記載してください。
+      - 禁止事項（やってはいけないこと）があれば明記してください。
