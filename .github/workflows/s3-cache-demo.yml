@@ -1,7 +1,6 @@
-name: deploy-client
+name: s3-cache-demo
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
