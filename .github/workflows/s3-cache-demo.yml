@@ -22,14 +22,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Check if cache.txt exists in S3 and sleep if it does
+    - name: Wait until cache.txt is removed from S3
       run: |
-        if aws s3 ls s3://github-open-hands/cache.txt | grep cache.txt; then
+        while aws s3 ls s3://github-open-hands/cache.txt | grep cache.txt; do
           echo "cache.txt exists. Sleeping for 60 seconds."
           sleep 60
-        else
-          echo "cache.txt does not exist. Continuing."
-        fi
+        done
+        echo "cache.txt does not exist. Continuing."
 
     - name: Generate cache.txt with project name and current time
       run: |
