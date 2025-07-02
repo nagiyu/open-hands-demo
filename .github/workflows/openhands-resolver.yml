@@ -1,7 +1,6 @@
----
 name: Resolve Issue with OpenHands
 
-"on":
+on:
   issues:
     types: [labeled]
   pull_request:
