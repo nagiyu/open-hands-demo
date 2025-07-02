@@ -36,5 +36,10 @@ jobs:
         echo "Time: $(date -u '+%Y-%m-%dT%H:%M:%SZ')" >> cache.txt
     
     - name: Upload file to S3
-      run: |
-        aws s3 cp ./cache.txt s3://github-open-hands/ --quiet
+      run: aws s3 cp ./cache.txt s3://github-open-hands/ --quiet
+
+    - name: Wait for 60 seconds
+      run: sleep 60
+    
+    - name: Delete cache.txt from S3
+      run: aws s3 rm s3://github-open-hands/cache.txt
