@@ -24,7 +24,7 @@ jobs:
 
     - name: Check if cache.txt exists in S3 and sleep if it does
       run: |
-        if aws s3 ls s3://github-open-hands/cache.txt --quiet; then
+        if aws s3 ls s3://github-open-hands/cache.txt | grep cache.txt; then
           echo "cache.txt exists. Sleeping for 60 seconds."
           sleep 60
         else
