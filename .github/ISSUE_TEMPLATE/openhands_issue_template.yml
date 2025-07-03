@@ -1,0 +1,76 @@
+---
+name: "OpenHands作業依頼"
+about: "OpenHands AIが認識しやすい作業依頼用テンプレート"
+labels: ["openhands", "ai-task"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 概要 (Summary)
+        作業内容を簡潔に記載してください。
+  - type: textarea
+    id: summary
+    attributes:
+      label: 概要 (Summary)
+      description: 作業内容を簡潔に記載してください。
+      placeholder: 例）データの前処理スクリプト作成
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## 詳細 (Details)
+        作業の背景や目的、詳細な要件を記載してください。
+  - type: textarea
+    id: details
+    attributes:
+      label: 詳細 (Details)
+      description: 作業の背景や目的、詳細な要件を記載してください。
+      placeholder: 例）データの形式や処理内容など
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## 完了条件 (Acceptance Criteria)
+        - 具体的な完了条件を箇条書きで記載してください。
+        - 例: テストが全てパスすること
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 完了条件 (Acceptance Criteria)
+      description: 具体的な完了条件を箇条書きで記載してください。
+      placeholder: 例）- テストが全てパスすること
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## 参考情報 (Reference)
+        関連する資料やリンクがあれば記載してください。
+  - type: textarea
+    id: reference
+    attributes:
+      label: 参考情報 (Reference)
+      description: 関連する資料やリンクがあれば記載してください。
+      placeholder: 例）関連ドキュメントやURL
+    validations:
+      required: false
+  - type: textarea
+    id: prohibitions
+    attributes:
+      label: 禁止事項 (Prohibitions)
+      description: 作業においてやってはいけないこと・禁止事項があれば記載してください。
+      placeholder: 例）- 本番データの削除は禁止
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### OpenHands AI向けガイド
+        - 作業内容・目的・完了条件が明確になるように記載してください。
+        - 曖昧な表現は避け、具体的なアクションや期待結果を明記してください。
+        - 必要に応じて追加の情報や前提条件も記載してください。
+      - 禁止事項（やってはいけないこと）があれば明記してください。
